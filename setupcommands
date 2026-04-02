@@ -1,2 +1,2 @@
-docker build -t floppy .
-docker run --env-file .env floppy
+sudo docker build -t floppy .
+sudo docker run --env-file .env floppy
