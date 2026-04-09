@@ -13,8 +13,8 @@ sudo docker stop $CONTAINER_NAME 2>/dev/null || true
 echo "🧹 Removing old container..."
 sudo docker rm $CONTAINER_NAME 2>/dev/null || true
 
-echo "🏗️ Building temporary image..."
-IMAGE_ID=$(sudo docker build -q .)
+echo "🏗️ Building Docker image (verbose)..."
+IMAGE_ID=$(sudo docker build . | tee /dev/tty | tail -n 1 | awk '{print $3}')
 
 echo "🚀 Starting new container..."
 sudo docker run -d \
@@ -25,4 +25,5 @@ sudo docker run -d \
 echo "🧽 Cleaning up dangling images..."
 sudo docker image prune -f
 
-echo "✅ Done. Container '$CONTAINER_NAME' is running."
+echo "📜 Showing logs..."
+sudo docker logs -f $CONTAINER_NAME
