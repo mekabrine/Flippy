@@ -14,7 +14,8 @@ echo "🧹 Removing old container..."
 sudo docker rm $CONTAINER_NAME 2>/dev/null || true
 
 echo "🏗️ Building Docker image (verbose)..."
-IMAGE_ID=$(sudo docker build . | tee /dev/tty | tail -n 1 | awk '{print $3}')
+sudo docker build --iidfile image_id.txt .
+IMAGE_ID=$(cat image_id.txt)
 
 echo "🚀 Starting new container..."
 sudo docker run -d \
