@@ -18,7 +18,7 @@ sudo docker build --iidfile image_id.txt .
 IMAGE_ID=$(cat image_id.txt)
 
 echo "🚀 Starting new container..."
-docker run -d \
+sudo docker run -d \
   --name $CONTAINER_NAME \
   --restart unless-stopped \
   --env-file .env \
